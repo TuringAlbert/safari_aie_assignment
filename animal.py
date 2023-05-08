@@ -19,6 +19,3 @@ class Zebra(Animal):
 
 print('naoko')
 
-class Lion(Animal):
-        def move(self, occupancy_grid):
-            print('<<< NOT IMPLEMENTED >>>')
