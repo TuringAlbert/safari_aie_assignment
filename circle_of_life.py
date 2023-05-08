@@ -19,5 +19,14 @@ class CircleOfLife:
         key = input('enter [q] to quit:')
         if key == 'q':
             exit()
+
+    def step_move(self):
+        print_TODO('step_move()')
+        for zebra in self.zebras:
+            print_TODO('get empty neighbor')
+            direction = 'left'
+            zebra.move(direction)
+    
+            
 if __name__ == '__main__':
     safari = CircleOfLife(5,5,2)
