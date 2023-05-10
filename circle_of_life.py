@@ -1,4 +1,7 @@
 from animal import Animal
+import numpy as np
+import os
+
 
 def print_TODO(todo):
     print(f'<<< NOT IMPLEMENTED : {todo} >>>')
@@ -14,11 +17,27 @@ class CircleOfLife:
         print(f'\tnumber of zebras = {len(self.zebras)}')
         print(f'\tnumber of lions = {len(self.lions)}')
 
-    def display(self):
-        print_TODO('display()')
-        key = input('enter [q] to quit:')
-        if key == 'q':
-            exit()
+    def display():
+        print("Welcome to Safari!")
+        print(" 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 ")
+        print("----------------------------------------------------")
+        
+        # os.system('cls') ##전부 사라지게 하는 코드
+        
+        # for i in range(20):
+        #     print("--")
+        grid = np.zeros((20,20), dtype= int)
+        # for i in range(20):
+        #     row = (['0'] * 20)
+        #     # row = row.append("\n")
+        #     grid.append(row)
+            
+        print(grid)
+        # print_TODO('display()')
+        # key = input('enter [q] to quit:')
+        # if key == 'q':
+        #     exit()
+            
 
     def step_move(self):
         print_TODO('step_move()')
@@ -30,3 +49,4 @@ class CircleOfLife:
             
 if __name__ == '__main__':
     safari = CircleOfLife(5,5,2)
+    CircleOfLife.display()
