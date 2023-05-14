@@ -1,4 +1,4 @@
-from animal import Animal
+from animal_jy import Animal
 import numpy as np
 import os
 
@@ -18,6 +18,9 @@ class CircleOfLife:
         print(f'\tnumber of lions = {len(self.lions)}')
 
     def display():
+        print(f'Clock: ')
+        top_coord_str = " ".join([f'{coord}' for coord in range(20)])
+        print(top_coord_str)
         print("Welcome to Safari!")
         print(" 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 ")
         print("----------------------------------------------------")
@@ -27,12 +30,14 @@ class CircleOfLife:
         # for i in range(20):
         #     print("--")
         grid = np.zeros((20,20), dtype= int)
-        # for i in range(20):
-        #     row = (['0'] * 20)
-        #     # row = row.append("\n")
-        #     grid.append(row)
-            
         print(grid)
+        grid = [[0 for _ in range(20)] for _ in range(20)]
+        for i in range(20):
+            grid.append(i + 1)
+        print(grid)
+
+            
+    
         # print_TODO('display()')
         # key = input('enter [q] to quit:')
         # if key == 'q':
