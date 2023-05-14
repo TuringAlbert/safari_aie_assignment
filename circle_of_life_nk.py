@@ -2,6 +2,7 @@ from animal_nk import Animal
 import numpy as np
 import matplotlib.pyplot as plt
 import os
+import random
 
 
 def print_TODO(todo):
@@ -18,47 +19,67 @@ class CircleOfLife:
         print(f'\tnumber of zebras = {len(self.zebras)}')
         print(f'\tnumber of lions = {len(self.lions)}')
 
-    def display():
-        print("Welcome to Safari!")
-        print(" 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 ")
-        print("----------------------------------------------------")
+   
+grid = [['O' for _ in range(20)] for _ in range(20)]
 
-    grid = [['O' for _ in range(20)] for _ in range(20)]
+def update_grid():
+    num_L = 5
+    num_Z = 100
 
-    print('   ', end=' ')
-    for i in range(1, 21):
-        print(f'{i:2}', end='')
+    for _ in range(num_L):
+        while True:
+            row = random.randint(0, 19)
+            col = random.randint(0, 19)
+            if grid[row][col] == 'O':
+                grid[row][col] = 'L'
+                break
+
+    for _ in range(num_Z):
+        while True:
+            row = random.randint(0, 19)
+            col = random.randint(0, 19)
+            if grid[row][col] == 'O':
+                grid[row][col] = 'Z'
+                
+                break
+
+print('   ', end=' ')
+for i in range(1, 21):
+    print(f'{i:2}', end='')
+print()
+
+print('   ', end=' ')
+for i in range(1, 41):
+    print(f'-', end='')
+print()
+
+for i in range(20):
+    print(f'{i + 1:2}', '|', end=' ')
+    for j in range(20):
+        print(grid[i][j], end=' ')
     print()
-
-    print('   ', end=' ')
-    for i in range(1, 40):
-        print(f'-', end='')
-    print()
-
-
-    for i in range(20):
-        print(f'{i + 1:2}', '|', end=' ')
-        for j in range(20):
-            print(grid[i][j], end=' ')
+       
+while True:
+    user_input = input()
+    if user_input == '':
+        update_grid()
+        print('   ', end=' ')
+        for i in range(1, 21):
+            print(f'{i:2}', end='')
         print()
 
+        print('   ', end=' ')
+        for i in range(1, 41):
+            print(f'-', end='')
+        print()
 
-        # os.system('cls') ##전부 사라지게 하는 코드
-        
-        # for i in range(20):
-        #     print("--")
-        # grid = np.zeros((20,20), dtype= int)
-        # for i in range(20):
-        #     row = (['0'] * 20)
-        #     # row = row.append("\n")
-        #     grid.append(row)
-            
-        #print(grid)
-        # print_TODO('display()')
-        # key = input('enter [q] to quit:')
-        # if key == 'q':
-        #     exit()
-            
+        for i in range(20):
+            print(f'{i + 1:2}', '|', end=' ')
+            for j in range(20):
+                print(grid[i][j], end=' ')
+            print()
+    else:
+        break            
 
     def step_move(self):
         print_TODO('step_move()')
@@ -66,7 +87,6 @@ class CircleOfLife:
             print_TODO('get empty neighbor')
             direction = 'left'
             zebra.move(direction)
-    
             
 if __name__ == '__main__':
     safari = CircleOfLife(5,5,2)
