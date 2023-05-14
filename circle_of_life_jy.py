@@ -14,6 +14,7 @@ class CircleOfLife:
         self.zebras = [Animal(0,0) for _ in range(num_zebras)]
         self.lions = [Animal(0,0) for _ in range(num_lions)]
         self.timestep = 0
+        self.grid = [[0 for _ in range(world_size)] for _ in range(world_size)]
         self.world_size = world_size + 1
         print('Welcome to AIE Safari!')
         print(f'\tworld size = {world_size}')
@@ -21,12 +22,14 @@ class CircleOfLife:
         print(f'\tnumber of lions = {len(self.lions)}')
 
     def display(self):
-        print("Welcome to Safari!")
-        print(f'time step = {self.timestep}')
+        # #test of grid
+        # print("test of grid : ")
+        # print(self.grid)
+        
         # 상단 숫자 및 Clock Timestep
-        print(' ', end = '  ')
-        for i in range(1, self.world_size):
-            if i == 20:
+        print('     ', end = '  ')
+        for i in range(1, len(self.grid)+1):
+            if i == len(self.grid):
                 print(f'{i:2} time step = {self.timestep}')
             else:
                 print(f'{i:2}', end=' ')
@@ -36,14 +39,15 @@ class CircleOfLife:
         top_coord_str = "-".join([ "-" for coord in range(31)])
         print(top_coord_str)
             
-        # 좌측 숫자 및 좌측/우측 격자 
-        for i in range(1, self.world_size):
+        # 내부 값, 좌측 숫자 및 좌측/우측 격자 
+        for i in range(1, len(self.grid)+1):
             print(f'{i:2}', end= '  ')
             print(f'{"|":2}', end= '  ')
-            for _ in range(1, self.world_size):
-                print('0', end='  ')
-            print(f'{"|":2}', end= '  ')
-            print() #enter
+            print(self.grid[i])
+            #     for z in i:
+            #         print(z, end='  ')
+            # print(f'{"|":2}', end= '  ')
+            # print() #enter
         
         # 하단 격자
         print('   ', end = '  ')
