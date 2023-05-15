@@ -5,7 +5,6 @@ import os
 
 def print_TODO(todo):
     print(f'<<< NOT IMPLEMENTED : {todo} >>>')
-    
 class CircleOfLife:
     def __init__(self, world_size, num_zebras, num_lions):
         self.occupancy = [[False for _ in range(world_size)]
@@ -14,7 +13,8 @@ class CircleOfLife:
         self.zebras = [Animal(0,0) for _ in range(num_zebras)]
         self.lions = [Animal(0,0) for _ in range(num_lions)]
         self.timestep = 0
-        self.grid = [[0 for _ in range(world_size)] for _ in range(world_size)]
+        self.grid = [[0 for _ in range(world_size)] 
+                        for _ in range(world_size)]
         self.world_size = world_size + 1
         print('Welcome to AIE Safari!')
         print(f'\tworld size = {world_size}')
@@ -38,11 +38,16 @@ class CircleOfLife:
         print('   ', end = '  ')
         top_coord_str = "-".join([ "-" for coord in range(31)])
         print(top_coord_str)
-            
+        for animal in self.zebras:
+            self.grid[animal.y][animal.x] = 'Z'
+        for animal in self.lions:
+            self.grid[animal.y][animal.x] = 'L'
+      
         # 내부 값, 좌측 숫자 및 좌측/우측 격자 
-        for i in range(1, len(self.grid)+1):
+        for i in range(0, len(self.grid)):
             print(f'{i:2}', end= '  ')
             print(f'{"|":2}', end= '  ')
+            
             print(self.grid[i])
             #     for z in i:
             #         print(z, end='  ')
@@ -59,49 +64,47 @@ class CircleOfLife:
         # top_coord_str = " ".join([f'{coord}' for coord in range(self.world_size)]) #len(self.grid)
         # print(top_coord_str)
         
+        key = input('enter [q] to quit:')
+        os.system('clear') ##input 이후 전부 사라지게 하는 코드
+        if key == 'q':
+            exit()
         
-        # os.system('cls') ##input 이후 전부 사라지게 하는 코드
-        
-        # for i in range(20):
-        #     print("--")
-        grid = np.zeros((20,20), dtype= int)
-        # print(grid)
-        grid = [[0 for _ in range(20)] for _ in range(20)]
-        for i in range(20):
-            grid.append(i + 1)
-        # print(grid)
-
-            
-    
-        # print_TODO('display()')
-        # key = input('enter [q] to quit:')
-        # if key == 'q':
-        #     exit()
-            
 
     def step_move(self):
         print_TODO('step_move()')
-        for zebra in self.zebras:
-            print_TODO('get empty neighbor')
-            direction = 'left'
-            zebra.move(direction)
         for lion in self.lions:
-            print_TODO('get neighboring zebras')
-            print_TODO('move to zebra if found, else move to empty')
-            print_TODO('get empty neighbor')
-            direction = 'left'
+            direction = 'right'
             lion.move(direction)
+        # for zebra in self.zebras:
+        #     print_TODO('get empty neighbor')
+        #     direction = 'left'
+        #     zebra.move(direction)
+        
+        # for lion in self.lions:
+        #     print_TODO('get neighboring zebras')
+        #     print_TODO('move to zebra if found, else move to empty')
+        #     print_TODO('get empty neighbor')
+        #     direction = 'right'
+        #     lion.move(direction)
     
     def step_breed(self):
         print_TODO('step_breed()')
-        for animal in self.zebras + self.lions:
-            print_TODO('get empty neighbor')
-            x, y = 0, 0
-            animal.breed(x, y)
+        # for animal in self.zebras + self.lions:
+        #     print_TODO('get empty neighbor')
+        #     x, y = 0, 0
+        #     animal.breed(x, y)
+            
+    def run(self, num_timesteps=1):
+        self.display()
+        
+        # for _ in range(num_timesteps):
+        #     self.timestep += 1
+        #     self.step_move()
+        # self.display()
             
 if __name__ == '__main__':
     safari = CircleOfLife(20,100,5) #worldsize, zebras, lions
-    safari.display()
-    
+    # safari.display()
+    safari.run(3)
     # safari.step_move()
     # safari.step_breed()
