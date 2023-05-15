@@ -1,5 +1,7 @@
 import random
 
+import random
+
 class Animal:
     def __init__(self, x, y):
         self.x = x
@@ -37,7 +39,7 @@ class Plain:
                     self.grid[x][y] = lion
                     self.lions.append(lion)
                     break
-
+                
         for _ in range(100):
             while True:
                 x, y = random.randint(0, self.size-1), random.randint(0, self.size-1)
@@ -58,4 +60,6 @@ plain.populate()
 
 for _ in range(100):  # 100 timestep 진행
     plain.timestep()
+
+
 

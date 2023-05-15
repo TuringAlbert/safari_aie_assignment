@@ -72,9 +72,10 @@ class CircleOfLife:
 
     def step_move(self):
         print_TODO('step_move()')
-        for lion in self.lions:
-            direction = 'right'
-            lion.move(direction)
+        self.x += 1
+        # for lion in self.lions:
+        #     direction = 'right'
+        #     lion.move(direction)
         # for zebra in self.zebras:
         #     print_TODO('get empty neighbor')
         #     direction = 'left'
@@ -96,11 +97,10 @@ class CircleOfLife:
             
     def run(self, num_timesteps=1):
         self.display()
-        
-        # for _ in range(num_timesteps):
-        #     self.timestep += 1
-        #     self.step_move()
-        # self.display()
+        for _ in range(num_timesteps):
+            self.timestep += 1
+            self.step_move()
+        self.display()
             
 if __name__ == '__main__':
     safari = CircleOfLife(20,100,5) #worldsize, zebras, lions
