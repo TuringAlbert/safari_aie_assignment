@@ -60,7 +60,7 @@ for i in range(20):
     print()
        
 while True:
-    user_input = input()
+    user_input = input('enter or q')
     if user_input == '':
         update_grid()
         print('   ', end=' ')
@@ -78,7 +78,7 @@ while True:
             for j in range(20):
                 print(grid[i][j], end=' ')
             print()
-    else:
+    elif user_input == 'q':
         break            
 
     def step_move(self):
