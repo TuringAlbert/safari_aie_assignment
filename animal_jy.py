@@ -1,4 +1,6 @@
 import random
+from utils import print_TODO
+
 
 class Animal:
     def __init__(self, x, y):
@@ -34,6 +36,7 @@ class Animal:
         return neighbors_valid
 
 class Zebra(Animal):
+    # print(f'before : {self.x=}, {self.y=}')
     # def move(self, occupancy_grid):
     #     self.y += 1
     #     print('<<< NOT IMPLEMENTED >>>')
@@ -42,13 +45,18 @@ class Zebra(Animal):
         
     def move(self, grid):
         print(f'before: {self.x=}, {self.y=}')
-        neighbor = self.get_neighbors(grid, target='.')
-        if len(neighbor) > 0:
+        neighbors = self.get_neighbors(grid, target='0')
+        chosen_neighbor = random.choice(neighbors)
+        self.x, self.y = chosen_neighbor
+        if len(neighbors) > 0:
             chosen_neighbor = random.choice(neighbors)
             self.x, self.y = chosen_neighbor
         print(f'after: {self.x=}, {self.y=}')
 
 class Lion(Animal):
+    print_TODO('get neighboring zebra')
+    print_TODO('move to zebra if found')
+    
     # def move(self, occupancy_grid):
     #     self.x += 1
     #     print('<<< NOT IMPLEMENTED >>>')
@@ -57,8 +65,8 @@ class Lion(Animal):
         neighbors = self.get_neighbors(grid, target='Z')
         if len(neighbors) > 0:
             chosen_neighbor = random.choice(neighbors)
-            self.x, self.y =chosen_neighbor
+            self.x, self.y = chosen_neighbor
             self.hp = 3
             return
-        neighbors = self.get_neighbors(grid, target='.')
+        neighbors = self.get_neighbors(grid, target='0')
 
