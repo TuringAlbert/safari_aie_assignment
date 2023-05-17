@@ -1,3 +1,5 @@
+
+
 class Animal:
     def __init__(self, x, y):
         self.x = x
@@ -13,6 +15,7 @@ class Animal:
 
 class Zebra(Animal):
     def move(self, occupancy_grid):
+        self.y += 1
         print('<<< NOT IMPLEMENTED >>>')
     def breed(self, x, y):
         print('<<< NOT IMPLEMENTED >>>>>')
@@ -20,4 +23,5 @@ class Zebra(Animal):
 
 class Lion(Animal):
     def move(self, occupancy_grid):
+        self.x += 1
         print('<<< NOT IMPLEMENTED >>>')

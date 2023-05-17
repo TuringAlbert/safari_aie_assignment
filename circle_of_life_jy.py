@@ -1,4 +1,5 @@
-from animal_jy import Animal
+
+from animal_jy import Zebra, Lion, Animal
 import numpy as np
 import os
 
@@ -10,8 +11,8 @@ class CircleOfLife:
         self.occupancy = [[False for _ in range(world_size)]
                           for _ in range(world_size)]
         print_TODO('get random empty coordinates')
-        self.zebras = [Animal(0,0) for _ in range(num_zebras)]
-        self.lions = [Animal(0,0) for _ in range(num_lions)]
+        self.zebras = [Zebra(0,0) for _ in range(num_zebras)]
+        self.lions = [Lion(0,0) for _ in range(num_lions)]
         self.timestep = 0
         self.grid = [[0 for _ in range(world_size)] 
                         for _ in range(world_size)]
@@ -38,10 +39,10 @@ class CircleOfLife:
         print('   ', end = '  ')
         top_coord_str = "-".join([ "-" for coord in range(31)])
         print(top_coord_str)
-        for animal in self.zebras:
-            self.grid[animal.y][animal.x] = 'Z'
-        for animal in self.lions:
-            self.grid[animal.y][animal.x] = 'L'
+        for zebra in self.zebras:
+            self.grid[zebra.y][zebra.x] = 'Z'
+        for lion in self.lions:
+            self.grid[lion.y][lion.x] = 'L'
       
         # 내부 값, 좌측 숫자 및 좌측/우측 격자 
         for i in range(0, len(self.grid)):
@@ -72,14 +73,14 @@ class CircleOfLife:
 
     def step_move(self):
         print_TODO('step_move()')
-        self.x += 1
-        # for lion in self.lions:
-        #     direction = 'right'
-        #     lion.move(direction)
-        # for zebra in self.zebras:
-        #     print_TODO('get empty neighbor')
-        #     direction = 'left'
-        #     zebra.move(direction)
+        for lion in self.lions:
+            direction = 'right'
+            lion.move(direction)
+            
+        for zebra in self.zebras:
+            print_TODO('get empty neighbor')
+            direction = 'left'
+            zebra.move(direction)
         
         # for lion in self.lions:
         #     print_TODO('get neighboring zebras')
@@ -95,16 +96,16 @@ class CircleOfLife:
         #     x, y = 0, 0
         #     animal.breed(x, y)
             
-    def run(self, num_timesteps=1):
+    def run(self, num_timesteps=1000):
         self.display()
         for _ in range(num_timesteps):
             self.timestep += 1
             self.step_move()
-        self.display()
+            self.display()
             
 if __name__ == '__main__':
-    safari = CircleOfLife(20,100,5) #worldsize, zebras, lions
+    safari = CircleOfLife(4,1,2) #worldsize, zebras, lions
     # safari.display()
-    safari.run(3)
+    safari.run(100)
     # safari.step_move()
     # safari.step_breed()
