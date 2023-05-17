@@ -1,6 +1,6 @@
 from animal_nk import Animal
 import numpy as np
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import os
 import random
 
@@ -25,7 +25,6 @@ class CircleOfLife:
         def update_grid():
             num_L = 5
             num_Z = 100
-            # time_step = 0
 
             for _ in range(num_L):
                 while True:
@@ -59,29 +58,29 @@ class CircleOfLife:
                 print(grid[i][j], end=' ')
             print()
 
-        while True:
-            user_input = input('enter or q')
-            if user_input == '':
-                update_grid()
-                # time_step += 1
-                # print(f'Time Step: {time_step}')
-                print('   ', end=' ')
-                for i in range(1, 21):
-                    print(f'{i:2}', end='')
-                print()
+        # while True:
+        #     user_input = input('enter or q')
+        #     if user_input == '':
+        #         update_grid()
+        #         # time_step += 1
+        #         # print(f'Time Step: {time_step}')
+        #         print('   ', end=' ')
+        #         for i in range(1, 21):
+        #             print(f'{i:2}', end='')
+        #         print()
 
-                print('   ', end=' ')
-                for i in range(1, 41):
-                    print(f'-', end='')
-                print()
+        #         print('   ', end=' ')
+        #         for i in range(1, 41):
+        #             print(f'-', end='')
+        #         print()
 
-                for i in range(20):
-                    print(f'{i + 1:2}', '|', end=' ')
-                    for j in range(20):
-                        print(grid[i][j], end=' ')
-                    print()
-            elif user_input == 'q':
-                break
+        #         for i in range(20):
+        #             print(f'{i + 1:2}', '|', end=' ')
+        #             for j in range(20):
+        #                 print(grid[i][j], end=' ')
+        #             print()
+        #     elif user_input == 'q':
+        #         break
 
     def step_move(self):
         print_TODO('step_move()')
