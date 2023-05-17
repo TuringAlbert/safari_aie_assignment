@@ -112,3 +112,6 @@ if __name__ == '__main__':
     safari.run(100)
     # safari.step_move()
     # safari.step_breed()
+    
+
+print("0517")
