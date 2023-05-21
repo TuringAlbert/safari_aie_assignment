@@ -4,9 +4,6 @@ import numpy as np
 import os
 import random
 
-
-def print_TODO(todo):
-    print(f'<<< NOT IMPLEMENTED : {todo} >>>')
     
 class CircleOfLife:
     def __init__(self, world_size, num_zebras, num_lions):
