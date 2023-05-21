@@ -25,7 +25,8 @@ class Animal:
     #     self.x += 1
         
     def breed(self, x, y):
-         return Animal(x, y)
+        print(f'breed for {x}, {y}. <<<NOT IMPLEMENTED YET>>>')
+        # return Animal(x, y)
      
     def get_neighbors(self, grid, target):
         '''target can be '.', L, or Z
@@ -39,24 +40,25 @@ class Animal:
         neighbors.append([x + 1, y])
         neighbors.append([x, y - 1])
         neighbors.append([x, y + 1])
+        print("neighbors : ", neighbors)
         neighbors_valid = [neighbor for neighbor in neighbors
                         if grid[neighbor[1]][neighbor[0]] == target
-                        and neighbor[0] >= 0
-                        and neighbor[0] < world_width
-                        and neighbor[1] >= 0
-                        and neighbor[1] < world_height]
+                        and neighbor[0] >= 0 #x가 0보다 같거나 커야 한다
+                        and neighbor[0] < world_width # x가 world_width 보다 작아야 한다
+                        and neighbor[1] >= 0 #y가 0보다 같거나 커야 한다
+                        and neighbor[1] < world_height] #y가 world_width 보다 작아야 한다
         return neighbors_valid
 
 class Zebra(Animal):
     # print(f'before : {self.x=}, {self.y=}')
     # def move(self, occupancy_grid):
-    #     self.y += 1
+    #     self.y += 1 
     #     print('<<< NOT IMPLEMENTED >>>')
     def breed(self, x, y):
         print('<<< NOT IMPLEMENTED >>>>>')
         
     def move(self, grid):
-        print(f'before: {self.x=}, {self.y=}')
+        # print(f'before: {self.x=}, {self.y=}')
         self.move_to(grid, target='.')
     
         # chosen_neighbor = random.choice(neighbors)
