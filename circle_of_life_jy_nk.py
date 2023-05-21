@@ -8,8 +8,8 @@ from utils import print_TODO
 # random choice neight
 class CircleOfLife:
     def __init__(self, world_size, num_zebras, num_lions):
-        self.occupancy = [[False for _ in range(world_size)]
-                          for _ in range(world_size)]
+        # self.occupancy = [[False for _ in range(world_size)]
+                        #   for _ in range(world_size)]
         # print_TODO('get random empty coordinates')
         self.zebras = [Zebra(0,0) for _ in range(num_zebras)]
         self.lions = [Lion(0,0) for _ in range(num_lions)]
@@ -21,14 +21,11 @@ class CircleOfLife:
         print(f'\tworld size = {world_size}')
         print(f'\tnumber of zebras = {len(self.zebras)}')
         print(f'\tnumber of lions = {len(self.lions)}')
+
     def reset_grid(self):
         self.grid = [[0 for _ in range(self.world_size)] 
                         for _ in range(self.world_size)]
     def display(self):
-            # #test of grid
-            # print("test of grid : ")
-            # print(self.grid)
-            
             # 상단 숫자 및 Clock Timestep
             self.reset_grid()
             print('     ', end = '  ')
@@ -37,7 +34,9 @@ class CircleOfLife:
                     print(f'{i:2} time step = {self.timestep}')
                 else:
                     print(f'{i:2}', end=' ')
-            
+            print("zenras : ", self.zebras)
+            print("lions ; ", self.lions)
+
             # 상단 격자
             print('   ', end = '  ')
             top_coord_str = "-".join([ "-" for coord in range(31)])
@@ -46,12 +45,12 @@ class CircleOfLife:
                 self.grid[zebra.y][zebra.x] = 'Z'
             for lion in self.lions:
                 self.grid[lion.y][lion.x] = 'L'
+            print("self.grid : ", self.grid)
         
             # 내부 값, 좌측 숫자 및 좌측/우측 격자 
             for i in range(0, len(self.grid)):
                 print(f'{i:2}', end= '  ')
                 print(f'{"|":2}', end= '  ')
-                
                 print(self.grid[i])
                 #     for z in i:
                 #         print(z, end='  ')
@@ -72,18 +71,14 @@ class CircleOfLife:
             os.system('clear') ##input 이후 전부 사라지게 하는 코드
             if key == 'q':
                 exit()
-        
 
     def step_move(self):
-        # print_TODO('step_move()')
+        self.grid = [["." for _ in range(self/world_size)
+                          for _ in range(self.world_size)]]
         for lion in self.lions:
-            direction = 'right'
-            lion.move(self.grid)
-            
+            self.grid[zebra.y][zebra.x] = "Z"
         for zebra in self.zebras:
-            # print_TODO('get empty neighbor')
-            direction = 'left'
-            zebra.move(self.grid)
+            self.grid[zebra.y][zebra.x] = "Z"
         
         # for lion in self.lions:
         #     print_TODO('get neighboring zebras')
