@@ -7,16 +7,28 @@ class Animal:
         self.x = x
         self.y = y
         self.age = 0
-        
-    def move(self, direction="right"):
-        print(f'moving to {direction}. <<<NOT IMPLEMENTED YET>>>')
-        self.x += 1
+    
+    def move_to(self, grid, target) -> bool:
+        '''target can be ., L, or Z
+        returns True if moved
+        '''
+        neighbors = self.get_neighbors(grid, target)
+        if len(neighbors) > 0:
+            chosen_neighbor = random.choice(neighbors)
+            self.x, self.y = chosen_neighbor
+            return True
+        else:
+            return False
+    
+    # def move(self, direction="right"):
+    #     print(f'moving to {direction}. <<<NOT IMPLEMENTED YET>>>')
+    #     self.x += 1
         
     def breed(self, x, y):
          return Animal(x, y)
      
     def get_neighbors(self, grid, target):
-        '''target can be ., L, or Z
+        '''target can be '.', L, or Z
         returns a list of coordinates
         '''
         world_height = len(grid)
@@ -45,28 +57,38 @@ class Zebra(Animal):
         
     def move(self, grid):
         print(f'before: {self.x=}, {self.y=}')
-        neighbors = self.get_neighbors(grid, target='0')
-        chosen_neighbor = random.choice(neighbors)
-        self.x, self.y = chosen_neighbor
-        if len(neighbors) > 0:
-            chosen_neighbor = random.choice(neighbors)
-            self.x, self.y = chosen_neighbor
-        print(f'after: {self.x=}, {self.y=}')
+        self.move_to(grid, target='.')
+    
+        # chosen_neighbor = random.choice(neighbors)
+        # self.x, self.y = chosen_neighbor
+
+            
+        # print(f'after: {self.x=}, {self.y=}')
+        
+        # neighbors = self.get_neighbors(grid, target='.')
+        # if len(neighbors) > 0:
+        #     chosen_neighbor = random.choice(neighbors)
+        # self.x, self.y = chosen_neighbor
+
 
 class Lion(Animal):
-    print_TODO('get neighboring zebra')
     print_TODO('move to zebra if found')
     
-    # def move(self, occupancy_grid):
+    # def move(self,grid):
     #     self.x += 1
     #     print('<<< NOT IMPLEMENTED >>>')
-    
     def move(self, grid):
-        neighbors = self.get_neighbors(grid, target='Z')
-        if len(neighbors) > 0:
-            chosen_neighbor = random.choice(neighbors)
-            self.x, self.y = chosen_neighbor
+        # print(f'before: {self.x=}, {self.y=}')
+        hun_is_successful = self.move_to(grid, target='Z')
+        if hun_is_successful:
             self.hp = 3
-            return
-        neighbors = self.get_neighbors(grid, target='0')
+        else:
+            self.move_to(grid, target='.')
+        
+        print(f'after: {self.x=}, {self.y=}')
+        
+        # neighbors = self.get_neighbors(grid, target='.')
+        # if len(neighbors) > 0:
+        #     chosen_neighbor = random.choice(neighbors)
+        #     self.x, self.y = chosen_neighbor
 
