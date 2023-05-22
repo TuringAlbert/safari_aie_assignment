@@ -117,3 +117,4 @@ if __name__ == '__main__':
     safari = CircleOfLife(5,2,1) #worldsize, zebras, lions
     safari.run(100)
 
+print("new05")
