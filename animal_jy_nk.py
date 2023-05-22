@@ -7,6 +7,7 @@ class Animal:
         self.x = x
         self.y = y
         self.age = 0
+        # self.hp = 3 # 동물의 생명력
         
     def move_to(self, grid, target) -> bool:
         '''target can be ., L, or Z
@@ -45,14 +46,32 @@ class Animal:
         return neighbors_valid
 
 class Zebra(Animal):
-    def breed(self, x, y):
-        print('<<< NOT IMPLEMENTED >>>>>')
+    def breed(self):
+        if self.age >= 3:
+            neighbors = self.get_neighbors(grid, ".")
+            if len(neighbors) > 0:
+                chosen_neighbor = random.choice(neighbors)
+                x, y = chosen_neighbor
+                new_zebra = Zebra(x, y)
+                return new_zebra
+        return None
         
     def move(self, grid):
         self.move_to(grid, target=".")
 
+
 class Lion(Animal):
     print_TODO('move to zebra if found')
+
+    def breed(self):
+        if self.age >= 8:
+            neighbors = self.get_neighbors(grid, ".")
+            if len(neighbors) > 0:
+                chosen_neighbor = random.choice(neighbors)
+                x, y = chosen_neighbor
+                new_lion = Lion(x, y)
+                return new_lion
+        return None
     
     def move(self, grid):
         hun_is_successful = self.move_to(grid, target="Z")
@@ -60,6 +79,5 @@ class Lion(Animal):
             self.hp = 3
         else:
             self.move_to(grid, target=".")
-
         print(f'after: {self.x=}, {self.y=}')
 

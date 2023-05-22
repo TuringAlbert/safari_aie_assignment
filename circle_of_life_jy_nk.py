@@ -9,7 +9,7 @@ class CircleOfLife:
         self.zebras = [Zebra(0,0) for _ in range(num_zebras)]
         self.lions = [Lion(0,0) for _ in range(num_lions)]
         self.world_size = world_size
-        
+
         self.update_grid()
         self.timestep = 0
         print('Welcome to AIE Safari!')
@@ -30,12 +30,12 @@ class CircleOfLife:
             print('   ', end = '  ')
             top_coord_str = "-".join([ "-" for coord in range(len(self.grid))])
             print(top_coord_str)
-            print("self.grid : ", self.grid)
+            # print("self.grid : ", self.grid)
             for zebra in self.zebras:
                 self.grid[zebra.y][zebra.x] = 'Z'
             for lion in self.lions:
                 self.grid[lion.y][lion.x] = 'L'
-            print("self.grid : ", self.grid)
+            # print("self.grid : ", self.grid)
             # 내부 값, 좌측 숫자 및 좌측/우측 격자 
             for i in range(0, len(self.grid)):
                 print(f'{i:2}', end= '  ')
@@ -70,11 +70,21 @@ class CircleOfLife:
             self.update_grid
 
     def step_breed(self):
-        print_TODO('step_breed()')
         for animal in self.zebras + self.lions:
-            print_TODO('get empty neighbor')
-            x, y = 0, 0
-            animal.breed(x, y)
+            new_animal = animal.breed()
+            if new_animal is not None:
+                self.grid[new_animal.y][new_animal.x] = "Z" if isinstance(new_animal, Zebra) else "L"
+                if isinstance(new_animal, Zebra):
+                    self.zebras.append(new_animal)
+                else:
+                    self.lions.append(new_animal)
+
+    def step_hunger(self):
+        for lion in self.lions:
+            if lion.age >= 3:
+                lion.hunger_count += 1
+                if lion.hunger_count >= 3:
+                    self.lions.remove(lion)
             
     def run(self, num_timesteps=100):
         self.display()
@@ -84,7 +94,9 @@ class CircleOfLife:
             self.display()
             self.step_breed()
             self.display()
+            self.step_hunger()
+            self.display()
             
 if __name__ == '__main__':
-    safari = CircleOfLife(5,5,2) #worldsize, zebras, lions
+    safari = CircleOfLife(20,100,5) #worldsize, zebras, lions
     safari.run(100)
