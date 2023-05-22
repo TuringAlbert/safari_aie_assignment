@@ -48,11 +48,11 @@ class Animal:
         neighbors.append([x, y + 1])
         print("neighbors : ", neighbors)
         neighbors_valid = [neighbor for neighbor in neighbors
-                        if grid[neighbor[1]][neighbor[0]] == target
-                        and neighbor[0] >= 0 #x가 0보다 같거나 커야 한다
+                        if neighbor[0] >= 0 #x가 0보다 같거나 커야 한다
                         and neighbor[0] < world_width # x가 world_width 보다 작아야 한다
                         and neighbor[1] >= 0 #y가 0보다 같거나 커야 한다
-                        and neighbor[1] < world_height] #y가 world_width 보다 작아야 한다
+                        and neighbor[1] < world_height
+                        and str(grid[neighbor[1]][neighbor[0]]) == target] #y가 world_width 보다 작아야 한다
         return neighbors_valid
 
 class Zebra(Animal):
@@ -86,7 +86,7 @@ class Lion(Animal):
     #     self.x += 1
     #     print('<<< NOT IMPLEMENTED >>>')
     def move(self, grid):
-        # print(f'before: {self.x=}, {self.y=}')
+        print(f'before: {self.x=}, {self.y=}')
         hunt_is_successful = self.move_to(grid, target='Z')
         if hunt_is_successful:
             self.hp = 3

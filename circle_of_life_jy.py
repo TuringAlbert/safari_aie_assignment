@@ -55,7 +55,7 @@ class CircleOfLife:
         # print(top_coord_str)
         
         key = input('enter [q] to quit:')
-        os.system('clear') ##input 이후 전부 사라지게 하는 코드
+        # os.system('clear') ##input 이후 전부 사라지게 하는 코드
         if key == 'q':
             exit()
     def update_grid(self):
@@ -81,7 +81,7 @@ class CircleOfLife:
             
         for zebra in self.zebras:
             zebra.move(self.grid)
-            self.update_grid
+            self.update_grid()
             # print("zebra : ",zebra)
             # print_TODO('get empty neighbor')
             # direction = 'left'
