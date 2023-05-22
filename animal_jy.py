@@ -12,6 +12,8 @@ class Animal:
         '''target can be ., L, or Z
         returns True if moved
         '''
+        print("x : ", self.x)
+        print("y : ", self.y)
         neighbors = self.get_neighbors(grid, target)
         if len(neighbors) > 0:
             chosen_neighbor = random.choice(neighbors)
@@ -19,7 +21,11 @@ class Animal:
             return True
         else:
             return False
-    
+        
+        
+        print("x : ", self.x)
+        print("y : ", self.y)
+        
     # def move(self, direction="right"):
     #     print(f'moving to {direction}. <<<NOT IMPLEMENTED YET>>>')
     #     self.x += 1
@@ -81,8 +87,8 @@ class Lion(Animal):
     #     print('<<< NOT IMPLEMENTED >>>')
     def move(self, grid):
         # print(f'before: {self.x=}, {self.y=}')
-        hun_is_successful = self.move_to(grid, target='Z')
-        if hun_is_successful:
+        hunt_is_successful = self.move_to(grid, target='Z')
+        if hunt_is_successful:
             self.hp = 3
         else:
             self.move_to(grid, target='.')
