@@ -3,19 +3,31 @@ from animal_jy_nk import Zebra, Lion, Animal
 import numpy as np
 import os
 from utils import print_TODO
+import random
 
 class CircleOfLife:
     def __init__(self, world_size, num_zebras, num_lions):
-        self.zebras = [Zebra(0,0) for _ in range(num_zebras)]
-        self.lions = [Lion(0,0) for _ in range(num_lions)]
         self.world_size = world_size
-
+        random.seed(0)
+        zebra_coords, lion_coords = self.get_random_coords(num_zebras, num_lions)
+        self.zebras = [Zebra(y, x) for (y, x) in zebra_coords]
+        self.lions = [Lion(y, x) for (y, x) in lion_coords]
+        # self.zebras = [Zebra(0,0) for _ in range(num_zebras)]
+        # self.lions = [Lion(0,0) for _ in range(num_lions)]
         self.update_grid()
         self.timestep = 0
         print('Welcome to AIE Safari!')
         print(f'\tworld size = {world_size}')
         print(f'\tnumber of zebras = {len(self.zebras)}')
         print(f'\tnumber of lions = {len(self.lions)}')
+
+    def get_random_coords(self, num_zebras, num_lions):
+        all_coords = [(y, x) for y in range(self.world_size)
+                      for x in range(self.world_size)]
+        zebra_coords = random.sample(all_coords, num_zebras)
+        all_coords = list(set(all_coords) - set(zebra_coords))
+        lion_coords = random.sample(all_coords, num_lions)
+        return zebra_coords, lion_coords
 
     def display(self):
             # 상단 숫자 및 Clock Timestep

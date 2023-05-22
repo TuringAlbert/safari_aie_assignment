@@ -38,7 +38,8 @@ class Animal:
         neighbors.append([x, y + 1])
         print("neighbors : ", neighbors)
         neighbors_valid = [neighbor for neighbor in neighbors
-                        if grid[neighbor[1]][neighbor[0]] == target
+                        # if grid[neighbor[1]][neighbor[0]] == target
+                        if neighbors
                         and neighbor[0] >= 0
                         and neighbor[0] < world_width
                         and neighbor[1] >= 0
