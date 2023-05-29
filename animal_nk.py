@@ -2,23 +2,22 @@
 import random
 from utils import print_TODO
 
-
 class Animal:
     def __init__(self, y, x):
         self.x = x
         self.y = y
         self.age = 0
-        self.hp = 3 # 동물의 생명력
-        
+        self.hp = 3
+
     def move_to(self, grid, target) -> bool:
         ''' target can be ., L, or Z
-            returns True if moved'''
+            returns True if moved '''
         neighbors = self.get_neighbors(grid, target)
         if len(neighbors) > 0:
             grid[self.y][self.x] = Empty(self.y, self.x)
             chosen_neighbor = random.choice(neighbors)
             self.y, self.x = chosen_neighbor
-            grid[self.y][self.x].hp = 0
+            grid[self.y][self.x].hp = 0  # kill
             grid[self.y][self.x] = self
             return True
         else:
@@ -83,24 +82,14 @@ class Zebra(Animal):
         return 'Z'
 
     def move(self, grid):
-        neighbors = self.get_neighbors(grid, '.')
-        if len(neighbors) > 0:
-            grid[self.y][self.x] = Empty(self.y, self.x)
-            chosen_neighbor = random.choice(neighbors)
-            self.y, self.x = chosen_neighbor
-            grid[self.y][self.x] = self
-            self.age += 1
-            if self.is_ready_to_breed():
-                self.breed(grid)
-        else:
-            self.age += 1
+        self.move_to(grid, target='.')
 
-    def breed(self, grid):
-        child_coords = self.get_neighbors(grid, '.')
-        if len(child_coords) > 0:
-            child_y, child_x = random.choice(child_coords)
-            child = self.__class__(child_y, child_x)
-            grid[child_y][child_x] = child
+    # def breed(self, grid):
+    #     child_coords = self.get_neighbors(grid, '.')
+    #     if len(child_coords) > 0:
+    #         child_y, child_x = random.choice(child_coords)
+    #         child = self.__class__(child_y, child_x)
+    #         grid[child_y][child_x] = child
 
     def is_ready_to_breed(self):
         return self.age != 0 and self.age % 3 == 0
