@@ -94,24 +94,16 @@ class Lion(Animal):
     #     return None
     
     def move(self, grid):
-        # print(f'before: {self.x=}, {self.y=}')
-        # neighbors = self.get_neighbors(grid, target='Z')
-        # if len(neighbors) > 0:
-        #     chosen_neighbor = random.choice(neighbors)
-        #     self.x, self.y = chosen_neighbor
-        #     self.hp = 3
-        #     return
-        # neighbors = self.get_neighbors(grid, target='.')
-        # if len(neighbors) > 0:
-        #     chosen_neighbor = random.choice(neighbors)
-        #     self.x, self.y = chosen_neighbor
+
         hunt_is_successful = self.move_to(grid, target="Z")
         if hunt_is_successful:
             self.hp = 3
         else:
             self.move_to(grid, target=".")
             self.hp -= 1
-        # print(f'after: {self.x=}, {self.y=}')
+
     def is_ready_to_breed(self):
         return self.age != 0 and self.age % 8 == 0
+    
         
+    
