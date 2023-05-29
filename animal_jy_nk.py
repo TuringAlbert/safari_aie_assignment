@@ -19,8 +19,8 @@ class Animal:
             grid[self.y][self.x] = Empty(self.y, self.x)
             chosen_neighbor = random.choice(neighbors)
             self.y, self.x = chosen_neighbor
-            grid[self.y][self.x].hp = 0 #kill
-            grid[self.y][self.x] = self
+            grid[self.y][self.x].hp = 0 #도착지 사망처리
+            grid[self.y][self.x] = self #사망처리
             return True
         else:
             return False
@@ -55,12 +55,15 @@ class Zebra(Animal):
     def __str__(self) -> str:
         return 'Z'
     def move(self, grid):
-        self.move_to(grid, target=".")
-    
+        neighbors = self.get_neighbors(grid, target='.')
+        chosen_neighbor = random.choice(neighbors)
+        self.x, self.y = chosen_neighbor
+        if len(neighbors) > 0:
+            chosen_neighbor = random.choice(neighbors)
+            self.x, self.y = chosen_neighbor
     def is_ready_to_breed(self):
-        return self.age != 0 and self.age % 3 == 0
-    
-    # def breed(self):
+        return self.age != 0 and self.age % 3 == 0   
+    # def breed(self, y, x):
     #     if self.age >= 3:
     #         neighbors = self.get_neighbors(grid, ".")
     #         if len(neighbors) > 0:
@@ -92,6 +95,16 @@ class Lion(Animal):
     
     def move(self, grid):
         # print(f'before: {self.x=}, {self.y=}')
+        # neighbors = self.get_neighbors(grid, target='Z')
+        # if len(neighbors) > 0:
+        #     chosen_neighbor = random.choice(neighbors)
+        #     self.x, self.y = chosen_neighbor
+        #     self.hp = 3
+        #     return
+        # neighbors = self.get_neighbors(grid, target='.')
+        # if len(neighbors) > 0:
+        #     chosen_neighbor = random.choice(neighbors)
+        #     self.x, self.y = chosen_neighbor
         hunt_is_successful = self.move_to(grid, target="Z")
         if hunt_is_successful:
             self.hp = 3
