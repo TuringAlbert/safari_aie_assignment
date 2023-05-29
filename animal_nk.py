@@ -22,16 +22,10 @@ class Animal:
             return True
         else:
             return False
-     
-    def breed(self, grid):
-         print(f'breed for {y}, {x}. <<<NOT IMPLEMENTED YET>>>')
-         child = self.__class__(self.y, self.x)
-         child.move_to(grid, target='.')
-         grid[self.y][self.x] = self
 
     def get_neighbors(self, grid, target):
-        '''target can be ., L, or Z
-            returns a list of coordinates'''
+        ''' target can be ., L, or Z
+            returns a list of coordinates '''
         world_height = len(grid)
         world_width = len(grid[0])
         y, x = self.y, self.x
@@ -41,20 +35,20 @@ class Animal:
         neighbors.append([y, x - 1])
         neighbors.append([y, x + 1])
         neighbors_valid = [neighbor for neighbor in neighbors
-                           if neighbor[0] >= 0 #x가 0보다 같거나 커야 한다
-                           and neighbor[0] < world_width # x가 world_width 보다 작아야 한다
-                           and neighbor[1] >= 0 #y가 0보다 같거나 커야 한다
-                           and neighbor[1] < world_height
-                           and str(grid[neighbor[0]][neighbor[1]]) == target] #y가 world_width 보다 작아야 한다
-        print("neighbors : ", neighbors_valid)
+                           if neighbor[0] >= 0
+                           and neighbor[0] < world_height
+                           and neighbor[1] >= 0
+                           and neighbor[1] < world_width
+                           and str(grid[neighbor[0]][neighbor[1]]) == target]
         return neighbors_valid
 
-    def is_ready_to_breed(self):
-        return self.age != 0 and self.age % self.breed_interval == 0
-
+    def breed(self, grid):
+        child = self.__class__(self.y, self.x)
+        child.move_to(grid, target='.')
+        grid[self.y][self.x] = self
 
 class Empty(Animal):
-    def __str__(self) -> str:
+    def __str__(self):
         return '.'
 
 # class Zebra(Animal):
@@ -78,7 +72,7 @@ class Empty(Animal):
     #     return self.age != 0 and self.age % 3 == 0
 
 class Zebra(Animal):
-    def __str__(self) -> str:
+    def __str__(self):
         return 'Z'
 
     def move(self, grid):
@@ -96,7 +90,7 @@ class Zebra(Animal):
 
 
 class Lion(Animal):
-    def __str__(self) -> str:
+    def __str__(self):
         return 'L'
 
     # def breed(self):
@@ -110,14 +104,12 @@ class Lion(Animal):
     #     return None
     
     def move(self, grid):
-        print(f'before: {self.x=}, {self.y=}')
         hunt_is_successful = self.move_to(grid, target='Z')
         if hunt_is_successful:
             self.hp = 3
         else:
             self.move_to(grid, target='.')
             self.hp -= 1
-        print(f'after: {self.x=}, {self.y=}')
 
     def is_ready_to_breed(self):
         return self.age != 0 and self.age % 8 == 0
