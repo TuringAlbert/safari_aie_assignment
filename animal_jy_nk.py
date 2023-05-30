@@ -20,7 +20,7 @@ class Animal:
             chosen_neighbor = random.choice(neighbors)
             self.y, self.x = chosen_neighbor
             grid[self.y][self.x].hp = 0 #도착지 사망처리
-            grid[self.y][self.x] = self #사망처리
+            grid[self.y][self.x] = self
             return True
         else:
             return False
@@ -51,16 +51,11 @@ class Animal:
         print("neighbors : ", neighbors_valid)
         return neighbors_valid
 
-class Zebra(Animal):
+class Zebra(Animal): #Animal을 상속하고 있음 x,y를 Animal 클래스에 입력
     def __str__(self) -> str:
         return 'Z'
     def move(self, grid):
-        neighbors = self.get_neighbors(grid, target='.')
-        chosen_neighbor = random.choice(neighbors)
-        self.x, self.y = chosen_neighbor
-        if len(neighbors) > 0:
-            chosen_neighbor = random.choice(neighbors)
-            self.x, self.y = chosen_neighbor
+        self.move_to(grid, target=".")
     def is_ready_to_breed(self):
         return self.age != 0 and self.age % 3 == 0   
     # def breed(self, y, x):
@@ -94,8 +89,8 @@ class Lion(Animal):
     #     return None
     
     def move(self, grid):
-
         hunt_is_successful = self.move_to(grid, target="Z")
+
         if hunt_is_successful:
             self.hp = 3
         else:
