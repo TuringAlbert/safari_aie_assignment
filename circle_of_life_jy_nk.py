@@ -126,6 +126,21 @@ class CircleOfLife:
             self.housekeeping()
             
 if __name__ == '__main__':
+<<<<<<< HEAD
     safari = CircleOfLife(5,2,1) #worldsize, zebras, lions
+=======
+    # zebra = Zebra(0,0)
+    # lion = Lion(0,0)
+    # print(zebra.__class__)
+    # print(Zebra)
+    # print(lion.__class__)
+    # print(Lion)
+    # another_zebra = zebra.__class__(1,1)
+    # another_lion = lion.__class__(1,1)
+    # print(another_zebra)    
+    # print(another_lion)
+
+    safari = CircleOfLife(20,25,20) #worldsize, zebras, lions
+>>>>>>> 28c8328 (test)
     safari.run(100)
 
