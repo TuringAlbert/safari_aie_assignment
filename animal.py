@@ -48,7 +48,7 @@ class Animal:
                         and neighbor[1] >= 0 #y가 0보다 같거나 커야 한다
                         and neighbor[1] < world_height
                         and str(grid[neighbor[0]][neighbor[1]]) == target] #y가 world_width 보다 작아야 한다
-        print("neighbors : ", neighbors_valid)
+        # print("neighbors : ", neighbors_valid)
         return neighbors_valid
 
 class Zebra(Animal): #Animal을 상속하고 있음 x,y를 Animal 클래스에 입력
