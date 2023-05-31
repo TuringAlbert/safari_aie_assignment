@@ -1,4 +1,4 @@
-from animal_jy_nk import Zebra, Lion, Empty
+from animal import Zebra, Lion, Empty
 import numpy as np
 import os
 from utils import print_TODO
